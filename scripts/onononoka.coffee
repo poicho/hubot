@@ -2,15 +2,15 @@
 #   Find おのののか images
 #
 # Commands:
-#   hubot おのののか me - おのののかを君に
+#   hubot おのののか - おのののかを君に
 
 module.exports = (robot) ->
-  robot.respond /おのののか me/i, (msg) ->
+  robot.respond /おのののか/i, (msg) ->
     onoMe msg, (url) ->
       msg.send url
 
 onoMe = (msg, cb) ->
-  q = v: '1.0', rsz: '8', q: "おのののか", safe: 'moderate'
+  q = v: '1.0', rsz: '8', q: "おのののか", safe: 'off'
   msg.http('http://ajax.googleapis.com/ajax/services/search/images')
     .query(q)
     .get() (err, res, body) ->
