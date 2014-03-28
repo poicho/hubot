@@ -15,3 +15,5 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+    - heroku-deploy:
+        key-name: HEROKU_DEPLOY_KEY
