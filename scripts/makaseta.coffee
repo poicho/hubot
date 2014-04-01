@@ -13,4 +13,4 @@ module.exports = (robot) ->
       msg.send "しかし、ユーザーがいなかった！"
       return
     user = users[user_ids[Math.floor(Math.random() * user_ids.length)]]
-    msg.send "#{msg.match[1]} #{user.name} @#{user.mention_name} にまかせた!"
+    msg.send "#{msg.match[1]} #{user.name} にまかせた!"
