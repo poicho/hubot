@@ -1,3 +1,16 @@
+# Description:
+#   Hubot answers your question
+#
+# Configration:
+#   HUBOT_GOOGLE_SEARCH_KEY
+#   HUBOT_GOOGLE_SEARCH_CX
+#
+# Notes:
+#   Hubot replys with 〇〇とは
+#
+# Author:
+#   fly1tkg
+
 module.exports = (robot) ->
   robot.hear /(.*)とは/, (msg) ->
     msg.http('https://www.googleapis.com/customsearch/v1')
