@@ -20,15 +20,13 @@ module.exports = (robot) ->
         q: msg.match[1]
         num: 3
       .get() (err, res, body) ->
-        resp = ''
+        resp = '@' + msg.message.user.name + ' ' + msg.match[1] + 'っていうのは\n'
         results = JSON.parse(body)
-        if results.error
-          results.error.errors.forEach (err) ->
-            resp += err.message
-        else
+        if !err
           results.items.forEach (item) ->
             resp += item.title + ' - ' + item.link + '\n'
-        msg.send resp
+          msg.send resp
+
 
 
 
