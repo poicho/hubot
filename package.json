@@ -23,12 +23,12 @@
     "url": "https://github.com/github/hubot.git"
   },
   "dependencies": {
-    "hubot": ">= 2.6.0 < 3.0.0",
-    "hubot-scripts": ">= 2.5.0 < 3.0.0",
-    "hubot-hipchat": "~2.6.4",
     "Faker": "^0.7.0",
-    "hubot-sushiyuki": "0.0.7",
-    "hubot-cron": ">= 0.2.4"
+    "hubot": ">= 2.6.0 < 3.0.0",
+    "hubot-cron": ">= 0.2.4",
+    "hubot-scripts": ">= 2.5.0 < 3.0.0",
+    "hubot-slack": "^2.1.1",
+    "hubot-sushiyuki": "0.0.7"
   },
   "engines": {
     "node": ">= 0.8.x",
