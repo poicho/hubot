@@ -12,7 +12,7 @@
 #   fly1tkg
 
 module.exports = (robot) ->
-  robot.hear /(.*)とは/, (msg) ->
+  robot.hear /(.*)とは？/, (msg) ->
     msg.http('https://www.googleapis.com/customsearch/v1')
       .query
         key: process.env.HUBOT_GOOGLE_SEARCH_KEY
@@ -22,7 +22,7 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         resp = msg.match[1] + 'とは\n'
         results = JSON.parse(body)
-        if !err
+        if !err && results.items
           results.items.forEach (item) ->
             resp += item.title + ' - ' + item.link + '\n'
           msg.send resp
