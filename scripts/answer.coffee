@@ -6,7 +6,7 @@
 #   HUBOT_GOOGLE_SEARCH_CX
 #
 # Notes:
-#   Hubot replys with 〇〇とは
+#   Hubot replys with 〇〇とは?
 #
 # Author:
 #   fly1tkg
