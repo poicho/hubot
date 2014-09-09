@@ -30,10 +30,14 @@ getRanking = (msg) ->
         end: "#{end.getTime() / 1000}"
       )
       .get() (err, res, body) ->
-        msg.send '先週のチャンネルランキング発表!'
         json = JSON.parse(body)
+
+        ranking_msg = '先週のチャンネルランキング発表!\n'
+
         for channel, i in json
-          msg.send "#{i + 1}位: #{channel.title}(#{channel.channel_slug}, #{channel.view_count} views)"
+          ranking_msg += "#{i + 1}位: #{channel.title}(#{channel.channel_slug}, #{channel.view_count} views)\n"
+
+        msg.send ranking_msg
 
 login = (msg, cb) ->
   msg.http("#{process.env.HUBOT_CLIP_LOGIN}")
