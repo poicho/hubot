@@ -12,7 +12,7 @@
 #   fly1tkg
 
 module.exports = (robot) ->
-  robot.hear /(.*)とは？/, (msg) ->
+  robot.hear /(.*)とは(\?|？)/, (msg) ->
     msg.http('https://www.googleapis.com/customsearch/v1')
       .query
         key: process.env.HUBOT_GOOGLE_SEARCH_KEY
