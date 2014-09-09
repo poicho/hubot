@@ -2,10 +2,10 @@
 #   A way to interact with the Google Images API.
 #
 # Commands:
-#   hubot image me <query> - The Original. Queries Google Images for <query> and returns a random top result.
-#   hubot animate me <query> - The same thing as `image me`, except adds a few parameters to try to return an animated GIF instead.
-#   hubot mustache me <url> - Adds a mustache to the specified URL.
-#   hubot mustache me <query> - Searches Google Images for the specified query and mustaches it.
+#   hubot image me <query> - 何か画像を引っ張ってきます
+#   hubot animate me <query> - GIFアニメを引っ張ってきます
+#   hubot mustache me <url> - ひげ
+#   hubot mustache me <query> - ひげ
 
 module.exports = (robot) ->
   robot.respond /(image|img)( me)? (.*)/i, (msg) ->

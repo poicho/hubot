@@ -2,7 +2,7 @@
 #   何かを任せますします
 #
 # Commands:
-#   hubot <keywords>まかせた
+#   hubot <keywords>まかせた - 何かを誰かに任せます
 
 module.exports = (robot) ->
   robot.respond /(.*)(まかせた|任命)/i, (msg) ->
