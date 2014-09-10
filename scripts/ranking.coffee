@@ -5,6 +5,7 @@
 #   hubot ランキング教えて - 先週のランキングを教えてくれます
 #
 
+
 module.exports = (robot) ->
   robot.respond /(.*)ランキング(教えて|おしえて)$/i, (msg) ->
     getRanking msg
@@ -18,8 +19,10 @@ getRanking = (msg) ->
   end = new Date
   end.setDate(curr.getDate() - curr.getDay())
 
+  term_s = "#{start.getMonth() + 1}/#{start.getDate()}から#{end.getMonth() + 1}/#{end.getDate()}"
+
   msg.send '了解しました！'
-  msg.send "#{start.getMonth() + 1}/#{start.getDate()}から#{end.getMonth() + 1}/#{end.getDate()}のランキングを集計しています( ･`ω･´)"
+  msg.send "#{term_s}のランキングを集計しています( ･`ω･´)"
 
   login msg, (token) ->
     msg.http("#{process.env.HUBOT_CLIP_ADMIN_RANKING}")
@@ -32,12 +35,14 @@ getRanking = (msg) ->
       .get() (err, res, body) ->
         json = JSON.parse(body)
 
-        ranking_msg = '先週のチャンネルランキング発表!\n'
+        ranking_msg = "#{term_s}のチャンネルランキング発表!\n"
 
         for channel, i in json
           ranking_msg += "#{i + 1}位: #{channel.title}(#{channel.channel_slug}, #{channel.view_count} views)\n"
 
         msg.send ranking_msg
+
+        sendMail msg, "#{term_s}のランキング", ranking_msg
 
 login = (msg, cb) ->
   msg.http("#{process.env.HUBOT_CLIP_LOGIN}")
@@ -47,5 +52,23 @@ login = (msg, cb) ->
       cb json.token?.token
 
 
+mailer = require('nodemailer')
+transporter = mailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.HUBOT_MAIL_SENDER_USER,
+    pass: process.env.HUBOT_MAIL_SENDER_PASS
+  }
+})
 
+sendMail = (msg, subject, body) ->
+  options = {
+    from: "Hubot <#{process.env.HUBOT_MAIL_SENDER_USER}>",
+    to : process.env.HUBOT_RANKING_MAIL_TO,
+    subject: subject,
+    text: body
+  }
+  transporter.sendMail options, (err, info) ->
+    if not err
+      msg.send 'ランキングをメールしました'
 
