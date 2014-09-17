@@ -16,3 +16,5 @@ module.exports = (robot) ->
   robot.respond /TIME$/i, (msg) ->
     msg.send "Server time is: #{new Date()}"
 
+  robot.respond /ROOM_ID$/i, (msg) ->
+    msg.send "ROOM_ID is: #{msg.message.data.room_id}"
