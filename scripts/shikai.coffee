@@ -1,11 +1,11 @@
 # Description:
-#   何かを任せますします
+#   今日の司会を任せます
 #
 # Commands:
-#   hubot <keywords>まかせた - 何かを誰かに任せます
+#   hubot 今日の司会は<keywords>にまかせた
 
 module.exports = (robot) ->
-  robot.respond /(.*)(まかせた|任命)/i, (msg) ->
+  robot.hear /(.*)(今日の司会)/i, (msg) ->
 
     users = robot.brain.data.users
     user_ids = Object.keys(users)
@@ -13,4 +13,4 @@ module.exports = (robot) ->
       msg.send "しかし、ユーザーがいなかった！"
       return
     user = users[user_ids[Math.floor(Math.random() * user_ids.length)]]
-    msg.send "#{msg.match[1]} #{user.name} にまかせた!"
+    msg.send "今日の司会は #{user.name} にまかせた!"
