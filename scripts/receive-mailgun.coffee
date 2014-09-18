@@ -23,5 +23,5 @@ module.exports = (robot) ->
     #{body['stripped-signature']}
     ```
     """
-    res.messageRoom '#mailbox', message
+    robot.messageRoom '#mailbox', message
     res.end 'Thanks'
