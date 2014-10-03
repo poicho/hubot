@@ -17,7 +17,7 @@ module.exports = (robot) ->
     message = """
     #{body.subject} from #{body.from}\n
     ```
-    #{body['stripped-text']}
+    #{body['stripped-text'].replace(/\n+/, "\n")}
     """
     if body['stripped-signature'] && body['stripped-signature'].length > 0
       message += "\n#{body['stripped-signature']}"
