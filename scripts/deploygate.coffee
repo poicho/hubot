@@ -15,7 +15,7 @@
 find_ci_url = (gh, repoName, branch, clbk) ->
   url = "repos/#{gh.qualified_repo(repoName)}/commits/#{branch.commit.sha}/status"
   gh.get url, (status) ->
-    st = status.statuses.pop()
+    st = status.statuses.pop() # The first status is the last one
     clbk(st.target_url)
 
 find_branch_by_repo = (gh, repo, name, clbk) ->
@@ -32,11 +32,11 @@ module.exports = (bot) ->
     repo = msg.match[1]
     branchName = msg.match[2]
 
-    deployBranchName = "deploy-#{branchName}"
+    deployBranchName = "team-#{branchName}"
 
     find_branch_by_repo gh, repo, branchName, (baseBranch, branches) ->
       if not baseBranch
-        msg.send "Branch #{branchName} not found."
+        msg.send "Branch \"#{branchName}\" not found."
         return
 
       # Create or fetch deploy branch
@@ -47,13 +47,13 @@ module.exports = (bot) ->
       ok = (message, deployBranch) ->
         msg.send message
         find_ci_url gh, repo, deployBranch, (url) ->
-          msg.send "  on: #{url}"
+          msg.send "Deployed on: #{url}"
 
       # New
       if not deployBranch
-        msg.send "Create new branch #{deployBranchName} from #{branchName}."
+        msg.send "Create new branch \"#{deployBranchName}\" from \"#{branchName}.\""
         gh.branches(repo).create deployBranchName, from: branchName, (deployBranch) ->
-          ok("done. #{deployBranch.commit.url}\nWill be deploy...", deployBranch)
+          ok("done.", deployBranch)
 
       # Already merged
       else if baseBranch.commit.sha == deployBranch.commit.sha
@@ -63,4 +63,4 @@ module.exports = (bot) ->
       else
         msg.send "Merge #{branchName} into #{deployBranchName}."
         gh.branches(repo).merge branchName, into: deployBranchName, (mergeCommit) ->
-          ok("done. #{mergeCommit.url}\nWill be deploy...", deployBranch)
+          ok("done.", deployBranch)
