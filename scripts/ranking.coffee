@@ -1,6 +1,14 @@
 # Description:
 #   先週のClipのチャンネルのView数のランキングを教えてくれます
 #
+# Configuration:
+#   HUBOT_CLIP_ADMIN_RANKING
+#   HUBOT_CLIP_LOGIN
+#   HUBOT_RANKING_USER_EMAIL
+#   HUBOT_RANKING_USER_PASS
+#   HUBOT_MAIL_SENDER_USER
+#   HUBOT_RANKING_MAIL_TO
+#
 # Commands:
 #   hubot ランキング教えて - 先週のランキングを教えてくれます
 #

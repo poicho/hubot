@@ -1,11 +1,16 @@
 # Description:
 #   Qiita:Team
 #
+# Configuration:
+#   HUBOT_QIITA_ACCESS_TOKEN
+#   HUBOT_QIITA_TEAM_ID
+#
 # Commands:
 #   hubot qiita ds - clone DS item from last created one
 #
 # Author:
 #   gabu
+
 Qiita = require 'qiita-js'
 Qiita.setToken process.env.HUBOT_QIITA_ACCESS_TOKEN
 Qiita.setEndpoint "https://#{process.env.HUBOT_QIITA_TEAM_ID}.qiita.com/"
